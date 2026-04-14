@@ -1,0 +1,14 @@
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { SERVER_API_BASE } from "@/app/lib/server-api";
+
+export async function POST(req: NextRequest) {
+  const store = await cookies();
+  const token = store.get("access_token")?.value;
+  const res = await fetch(`${SERVER_API_BASE}/api/v1/promotions/validate`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify(await req.json()),
+  });
+  return NextResponse.json(await res.json(), { status: res.status });
+}
