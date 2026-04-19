@@ -36,7 +36,11 @@ export async function loginAction(
     const data = await res.json();
     token = data.access_token;
   } catch (err) {
-    return { error: `Cannot reach server: ${err instanceof Error ? err.message : String(err)}` };
+    const apiBase = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? null;
+    if (!apiBase) {
+      return { error: "API_URL is not set in Vercel environment variables. Add it in Vercel → Settings → Environment Variables → API_URL = https://your-railway-url.railway.app" };
+    }
+    return { error: `Cannot reach backend at ${apiBase}: ${err instanceof Error ? err.message : String(err)}` };
   }
 
   const cookieStore = await cookies();
