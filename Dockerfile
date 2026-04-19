@@ -13,8 +13,6 @@ RUN uv sync --no-dev --no-editable --frozen
 
 COPY . .
 
-EXPOSE 8000
-
 RUN chmod +x start.sh
 
 CMD ["./start.sh"]
