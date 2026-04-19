@@ -32,10 +32,13 @@ export default function ShiftsClient({ initialShifts, locations }: { initialShif
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ _action: "open", location_id: locationId, opening_float: parseFloat(openingFloat) || 0 }),
       });
-      const data = await res.json();
-      if (!res.ok) { setError(data.detail ?? "Failed"); return; }
-      setShifts((prev) => [data, ...prev]);
+      let data: Record<string, unknown>;
+      try { data = await res.json(); } catch { data = {}; }
+      if (!res.ok) { setError((data.detail as string) ?? `Server error (${res.status})`); return; }
+      setShifts((prev) => [data as unknown as Shift, ...prev]);
       setShowOpenModal(false);
+    } catch (e) {
+      setError(`Network error: ${e instanceof Error ? e.message : "Could not reach server"}`);
     } finally { setLoading(false); }
   }
 

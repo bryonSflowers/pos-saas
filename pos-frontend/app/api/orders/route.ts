@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-
 import { SERVER_API_BASE as API_BASE } from "@/app/lib/server-api";
 
 export async function POST(req: NextRequest) {
@@ -11,15 +10,19 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const res = await fetch(`${API_BASE}/api/v1/orders/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
-  });
-
-  const data = await res.json();
-  return NextResponse.json(data, { status: res.status });
+  try {
+    const res = await fetch(`${API_BASE}/api/v1/orders/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify(body),
+    });
+    try {
+      const data = await res.json();
+      return NextResponse.json(data, { status: res.status });
+    } catch {
+      return NextResponse.json({ detail: `Backend error (${res.status})` }, { status: res.status });
+    }
+  } catch (e) {
+    return NextResponse.json({ detail: `Cannot reach backend: ${e instanceof Error ? e.message : e}` }, { status: 503 });
+  }
 }
