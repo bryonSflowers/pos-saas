@@ -52,8 +52,8 @@ async def main():
 asyncio.run(main())
 PYEOF
 
-echo "Running database migrations..."
-uv run alembic upgrade head
+echo "Running database migrations (30s timeout)..."
+timeout 30 uv run alembic upgrade head
 if [ $? -ne 0 ]; then
     echo "WARNING: Migration failed or timed out. Starting server anyway — some features may be unavailable."
 fi
