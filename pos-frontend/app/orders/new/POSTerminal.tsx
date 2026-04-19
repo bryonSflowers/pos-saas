@@ -16,10 +16,10 @@ type CartItem = { product: Product; quantity: number; discount_pct: number };
 type Props = { products: Product[]; locations: Location[]; categories: Category[] };
 
 const PAYMENT_METHODS = [
-  { value: "cash", label: "💵 Cash" },
-  { value: "card", label: "💳 Card" },
-  { value: "qr_code", label: "📱 QR" },
-  { value: "voucher", label: "🎫 Voucher" },
+  { value: "CASH", label: "💵 Cash" },
+  { value: "CARD", label: "💳 Card" },
+  { value: "QR_CODE", label: "📱 QR" },
+  { value: "VOUCHER", label: "🎫 Voucher" },
 ];
 
 export default function POSTerminal({ products, locations, categories }: Props) {
@@ -31,7 +31,7 @@ export default function POSTerminal({ products, locations, categories }: Props) 
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
-  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [paymentMethod, setPaymentMethod] = useState("CASH");
   const [cashGiven, setCashGiven] = useState("");
   const [pendingOrderId, setPendingOrderId] = useState<string | null>(null);
 
@@ -192,7 +192,7 @@ export default function POSTerminal({ products, locations, categories }: Props) 
         const order = await orderRes.json();
 
         // Card payments are handled by Stripe Terminal — set pending order and let panel take over
-        if (paymentMethod === "card") {
+        if (paymentMethod === "CARD") {
           setPendingOrderId(order.id);
           return;
         }
@@ -433,7 +433,7 @@ export default function POSTerminal({ products, locations, categories }: Props) 
           </div>
 
           {/* Cash change */}
-          {paymentMethod === "cash" && (
+          {paymentMethod === "CASH" && (
             <div className="flex gap-2">
               <input type="number" placeholder="Cash given" min="0" step="0.01"
                 value={cashGiven} onChange={(e) => setCashGiven(e.target.value)}
@@ -447,7 +447,7 @@ export default function POSTerminal({ products, locations, categories }: Props) 
           )}
 
           {/* Quick cash buttons */}
-          {paymentMethod === "cash" && total > 0 && (
+          {paymentMethod === "CASH" && total > 0 && (
             <div className="grid grid-cols-4 gap-1">
               {[Math.ceil(total), Math.ceil(total / 5) * 5, Math.ceil(total / 10) * 10, Math.ceil(total / 20) * 20]
                 .filter((v, i, a) => a.indexOf(v) === i)
@@ -470,7 +470,7 @@ export default function POSTerminal({ products, locations, categories }: Props) 
           {error && <p className="text-xs text-red-600 bg-red-50 rounded-lg px-2 py-1.5">{error}</p>}
 
           {/* Stripe Terminal panel — shown when card method selected */}
-          {paymentMethod === "card" && (
+          {paymentMethod === "CARD" && (
             <StripeTerminalPanel
               orderId={pendingOrderId}
               orderTotal={total}
@@ -486,13 +486,13 @@ export default function POSTerminal({ products, locations, categories }: Props) 
               className="w-full rounded-lg bg-black text-white py-3 text-sm font-semibold hover:bg-gray-800 disabled:opacity-50 transition-colors">
               {isPending
                 ? "Processing…"
-                : paymentMethod === "card"
+                : paymentMethod === "CARD"
                   ? `Create Order — Then Charge Card`
                   : `Charge ${currency} ${total.toFixed(2)}`}
             </button>
           )}
 
-          {pendingOrderId && paymentMethod !== "card" && (
+          {pendingOrderId && paymentMethod !== "CARD" && (
             <button onClick={() => router.push(`/orders/${pendingOrderId}`)}
               className="w-full rounded-lg bg-gray-100 text-gray-700 py-2 text-sm font-medium hover:bg-gray-200">
               View Order →

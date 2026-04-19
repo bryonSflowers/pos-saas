@@ -22,7 +22,7 @@ export default function ShiftsClient({ initialShifts, locations }: { initialShif
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const openShift = shifts.find((s) => s.status === "open");
+  const openShift = shifts.find((s) => s.status === "OPEN");
 
   async function handleOpenShift() {
     setLoading(true); setError("");
@@ -114,10 +114,10 @@ export default function ShiftsClient({ initialShifts, locations }: { initialShif
                   </td>
                   <td className="px-4 py-3 text-center">
                     <div className="flex flex-col items-center gap-1">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${s.status === "open" ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
-                        {s.status}
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${s.status === "OPEN" ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
+                        {s.status === "OPEN" ? "open" : "closed"}
                       </span>
-                      {s.status === "closed" && (
+                      {s.status === "CLOSED" && (
                         <Link href={`/shifts/${s.id}/report`}
                           className="text-xs text-blue-600 hover:text-blue-800 font-medium">
                           Z-Report

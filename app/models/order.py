@@ -12,10 +12,10 @@ if TYPE_CHECKING:
 
 
 class OrderStatus(str, PyEnum):
-    OPEN = "open"
-    PAID = "paid"
-    REFUNDED = "refunded"
-    VOIDED = "voided"
+    OPEN = "OPEN"
+    PAID = "PAID"
+    REFUNDED = "REFUNDED"
+    VOIDED = "VOIDED"
 
 
 class Order(Base, UUIDMixin, TimestampMixin):

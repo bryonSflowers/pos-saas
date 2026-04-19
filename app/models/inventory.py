@@ -7,14 +7,14 @@ from app.db.base import Base, UUIDMixin, TimestampMixin
 
 
 class AdjustmentReason(str, PyEnum):
-    RECOUNT = "recount"
-    DAMAGE = "damage"
-    THEFT = "theft"
-    RETURN = "return"
-    TRANSFER_IN = "transfer_in"
-    TRANSFER_OUT = "transfer_out"
-    OPENING_STOCK = "opening_stock"
-    OTHER = "other"
+    RECOUNT = "RECOUNT"
+    DAMAGE = "DAMAGE"
+    THEFT = "THEFT"
+    RETURN = "RETURN"
+    TRANSFER_IN = "TRANSFER_IN"
+    TRANSFER_OUT = "TRANSFER_OUT"
+    OPENING_STOCK = "OPENING_STOCK"
+    OTHER = "OTHER"
 
 
 class InventoryAdjustment(Base, UUIDMixin, TimestampMixin):

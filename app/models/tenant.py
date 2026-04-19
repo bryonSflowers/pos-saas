@@ -10,10 +10,10 @@ from app.db.base import Base, UUIDMixin, TimestampMixin
 
 
 class TenantPlan(str, PyEnum):
-    FREE = "free"
-    STARTER = "starter"
-    PRO = "pro"
-    ENTERPRISE = "enterprise"
+    FREE = "FREE"
+    STARTER = "STARTER"
+    PRO = "PRO"
+    ENTERPRISE = "ENTERPRISE"
 
 
 class Tenant(Base, UUIDMixin, TimestampMixin):

@@ -9,15 +9,15 @@ from app.db.base import Base, UUIDMixin, TimestampMixin
 
 
 class DiscountType(str, PyEnum):
-    PERCENTAGE = "percentage"   # e.g. 10% off
-    FIXED = "fixed"             # e.g. $5 off
-    BOGO = "bogo"               # buy one get one
+    PERCENTAGE = "PERCENTAGE"   # e.g. 10% off
+    FIXED = "FIXED"             # e.g. $5 off
+    BOGO = "BOGO"               # buy one get one
 
 
 class PromoScope(str, PyEnum):
-    ORDER = "order"             # applies to entire order
-    PRODUCT = "product"         # applies to specific product(s)
-    CATEGORY = "category"       # applies to a category
+    ORDER = "ORDER"             # applies to entire order
+    PRODUCT = "PRODUCT"         # applies to specific product(s)
+    CATEGORY = "CATEGORY"       # applies to a category
 
 
 class Promotion(Base, UUIDMixin, TimestampMixin):

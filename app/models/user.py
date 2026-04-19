@@ -9,10 +9,10 @@ from app.models.tenant import Tenant
 
 
 class UserRole(str, PyEnum):
-    OWNER = "owner"
-    ADMIN = "admin"
-    MANAGER = "manager"
-    CASHIER = "cashier"
+    OWNER = "OWNER"
+    ADMIN = "ADMIN"
+    MANAGER = "MANAGER"
+    CASHIER = "CASHIER"
 
 
 class User(Base, UUIDMixin, TimestampMixin):

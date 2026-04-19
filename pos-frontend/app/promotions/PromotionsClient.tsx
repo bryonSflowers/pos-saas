@@ -4,7 +4,7 @@ import { useState } from "react";
 
 type Promotion = {
   id: string; name: string; code: string | null;
-  discount_type: "percentage" | "fixed" | "bogo";
+  discount_type: "PERCENTAGE" | "FIXED" | "BOGO";
   discount_value: number; scope: string;
   min_order_amount: number | null; max_uses: number | null;
   uses_count: number; is_active: boolean;
@@ -12,14 +12,14 @@ type Promotion = {
 };
 
 type FormState = {
-  name: string; code: string; discount_type: "percentage" | "fixed" | "bogo";
+  name: string; code: string; discount_type: "PERCENTAGE" | "FIXED" | "BOGO";
   discount_value: string; scope: string; min_order_amount: string; max_uses: string;
   starts_at: string; ends_at: string;
 };
 
 const empty: FormState = {
-  name: "", code: "", discount_type: "percentage",
-  discount_value: "", scope: "order", min_order_amount: "", max_uses: "",
+  name: "", code: "", discount_type: "PERCENTAGE",
+  discount_value: "", scope: "ORDER", min_order_amount: "", max_uses: "",
   starts_at: "", ends_at: "",
 };
 
@@ -83,8 +83,8 @@ export default function PromotionsClient({ initialPromotions }: { initialPromoti
   }
 
   function discountLabel(p: Promotion) {
-    if (p.discount_type === "percentage") return `${p.discount_value}% off`;
-    if (p.discount_type === "fixed") return `$${p.discount_value.toFixed(2)} off`;
+    if (p.discount_type === "PERCENTAGE") return `${p.discount_value}% off`;
+    if (p.discount_type === "FIXED") return `$${p.discount_value.toFixed(2)} off`;
     return "BOGO";
   }
 
@@ -196,18 +196,18 @@ export default function PromotionsClient({ initialPromotions }: { initialPromoti
                   <label className="text-xs font-medium text-gray-700 block mb-1">Discount Type *</label>
                   <select value={form.discount_type} onChange={(e) => setForm({ ...form, discount_type: e.target.value as typeof form.discount_type })}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none">
-                    <option value="percentage">Percentage (%)</option>
-                    <option value="fixed">Fixed Amount ($)</option>
-                    <option value="bogo">Buy One Get One</option>
+                    <option value="PERCENTAGE">Percentage (%)</option>
+                    <option value="FIXED">Fixed Amount ($)</option>
+                    <option value="BOGO">Buy One Get One</option>
                   </select>
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-700 block mb-1">
-                    {form.discount_type === "percentage" ? "Discount %" : form.discount_type === "fixed" ? "Discount $" : "Value"}
+                    {form.discount_type === "PERCENTAGE" ? "Discount %" : form.discount_type === "FIXED" ? "Discount $" : "Value"}
                   </label>
                   <input type="number" min="0" step="0.01" value={form.discount_value}
                     onChange={(e) => setForm({ ...form, discount_value: e.target.value })}
-                    disabled={form.discount_type === "bogo"}
+                    disabled={form.discount_type === "BOGO"}
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black disabled:bg-gray-50 disabled:text-gray-400" />
                 </div>
               </div>

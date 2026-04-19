@@ -34,10 +34,10 @@ class Customer(Base, UUIDMixin, TimestampMixin):
 
 
 class LoyaltyTxnType(str, PyEnum):
-    EARN = "earn"
-    REDEEM = "redeem"
-    ADJUST = "adjust"
-    EXPIRE = "expire"
+    EARN = "EARN"
+    REDEEM = "REDEEM"
+    ADJUST = "ADJUST"
+    EXPIRE = "EXPIRE"
 
 
 class LoyaltyTransaction(Base, UUIDMixin, TimestampMixin):

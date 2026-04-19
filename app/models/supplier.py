@@ -28,10 +28,10 @@ class Supplier(Base, UUIDMixin, TimestampMixin):
 
 
 class POStatus(str, PyEnum):
-    DRAFT = "draft"
-    ORDERED = "ordered"
-    RECEIVED = "received"
-    CANCELLED = "cancelled"
+    DRAFT = "DRAFT"
+    ORDERED = "ORDERED"
+    RECEIVED = "RECEIVED"
+    CANCELLED = "CANCELLED"
 
 
 class PurchaseOrder(Base, UUIDMixin, TimestampMixin):

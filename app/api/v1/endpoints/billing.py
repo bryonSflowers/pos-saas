@@ -97,7 +97,7 @@ async def create_checkout_session(body: CheckoutBody, session: SessionDep, user:
     s = _stripe()
 
     try:
-        plan_enum = TenantPlan(body.plan)
+        plan_enum = TenantPlan(body.plan.upper())
     except ValueError:
         raise HTTPException(status_code=400, detail=f"Unknown plan: {body.plan}")
 
@@ -200,7 +200,7 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
 
             if tenant_id and plan_name:
                 try:
-                    plan_enum = TenantPlan(plan_name)
+                    plan_enum = TenantPlan(plan_name.upper())
                     tenant = await db.get(Tenant, UUID(tenant_id))
                     if tenant:
                         tenant.plan = plan_enum

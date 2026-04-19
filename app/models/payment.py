@@ -8,18 +8,18 @@ from app.db.base import Base, UUIDMixin, TimestampMixin
 
 
 class PaymentMethod(str, PyEnum):
-    CASH = "cash"
-    CARD = "card"
-    QR_CODE = "qr_code"
-    VOUCHER = "voucher"
-    SPLIT = "split"
+    CASH = "CASH"
+    CARD = "CARD"
+    QR_CODE = "QR_CODE"
+    VOUCHER = "VOUCHER"
+    SPLIT = "SPLIT"
 
 
 class PaymentStatus(str, PyEnum):
-    PENDING = "pending"
-    COMPLETED = "completed"
-    FAILED = "failed"
-    REFUNDED = "refunded"
+    PENDING = "PENDING"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+    REFUNDED = "REFUNDED"
 
 
 class Payment(Base, UUIDMixin, TimestampMixin):

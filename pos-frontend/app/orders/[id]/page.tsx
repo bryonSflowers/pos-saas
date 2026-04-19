@@ -12,10 +12,10 @@ type Order = {
 };
 
 const STATUS_STYLES: Record<string, string> = {
-  open: "bg-blue-50 text-blue-700",
-  paid: "bg-green-50 text-green-700",
-  refunded: "bg-yellow-50 text-yellow-700",
-  voided: "bg-gray-100 text-gray-500",
+  OPEN: "bg-blue-50 text-blue-700",
+  PAID: "bg-green-50 text-green-700",
+  REFUNDED: "bg-yellow-50 text-yellow-700",
+  VOIDED: "bg-gray-100 text-gray-500",
 };
 
 export default async function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {

@@ -9,8 +9,8 @@ from app.db.base import Base, UUIDMixin, TimestampMixin
 
 
 class ShiftStatus(str, PyEnum):
-    OPEN = "open"
-    CLOSED = "closed"
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
 
 
 class Shift(Base, UUIDMixin, TimestampMixin):

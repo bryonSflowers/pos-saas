@@ -53,7 +53,7 @@ export default async function DashboardPage() {
   const outOfStock = products.filter((p) => p.is_active && p.stock_qty === 0).length;
 
   const activeCustomers = Array.isArray(customers) ? customers.filter((c) => c.is_active).length : 0;
-  const openShift = Array.isArray(shifts) ? shifts.find((s) => s.status === "open") : null;
+  const openShift = Array.isArray(shifts) ? shifts.find((s) => s.status === "OPEN") : null;
 
   // Last 7 days revenue
   const sevenDaysAgo = new Date();

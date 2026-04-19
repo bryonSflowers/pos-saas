@@ -41,4 +41,4 @@ def require_role(*roles: str):
 # Type aliases for cleaner signatures
 SessionDep = Annotated[AsyncSession, Depends(get_session)]
 UserDep = Annotated[CurrentUser, Depends(get_current_user)]
-AdminDep = Annotated[CurrentUser, Depends(require_role("admin", "owner"))]
+AdminDep = Annotated[CurrentUser, Depends(require_role("ADMIN", "OWNER"))]

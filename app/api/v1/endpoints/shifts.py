@@ -110,7 +110,7 @@ async def close_shift(shift_id: UUID, body: ShiftClose, session: SessionDep, use
         raise HTTPException(status_code=404, detail="Shift not found")
     if shift.status == ShiftStatus.CLOSED:
         raise HTTPException(status_code=400, detail="Shift already closed")
-    if shift.cashier_id != user.user_id and user.role not in ("admin", "owner"):
+    if shift.cashier_id != user.user_id and user.role not in ("ADMIN", "OWNER"):
         raise HTTPException(status_code=403, detail="Cannot close another cashier's shift")
 
     # Calculate expected cash from cash payments during this shift
