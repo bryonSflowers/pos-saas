@@ -73,9 +73,12 @@ export default function LoginPage() {
           </div>
 
           {state?.error && (
-            <p className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-2">
-              {state.error}
-            </p>
+            <div className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-2 space-y-1">
+              <p>{state.error}</p>
+              <a href="/api/debug" target="_blank" className="underline text-red-500 text-xs">
+                View system diagnostics →
+              </a>
+            </div>
           )}
 
           <button
