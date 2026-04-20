@@ -5,18 +5,17 @@ WORKDIR /app
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-# Copy lock files first — install only dependencies (not the project itself)
-# This layer is cached unless pyproject.toml or uv.lock changes
+# Install dependencies only first (cached layer)
 COPY pyproject.toml uv.lock ./
 RUN uv sync --no-dev --no-install-project --frozen
 
-# Copy source and install the project
+# Copy source and install project
 COPY . .
 RUN uv sync --no-dev --frozen
 
 RUN chmod +x start.sh
 
-# Must match PORT env var set in Railway (8080)
-EXPOSE 8080
+# Railway routes to 8000 — must match port in start.sh
+EXPOSE 8000
 
 CMD ["./start.sh"]

@@ -58,5 +58,5 @@ if [ $? -ne 0 ]; then
     echo "WARNING: Migration failed or timed out. Starting server anyway — some features may be unavailable."
 fi
 
-echo "Starting server on port ${PORT:-8000}..."
-exec uv run uvicorn app.main:app --host 0.0.0.0 --port "${PORT:-8000}"
+echo "Starting server on port 8000..."
+exec uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
